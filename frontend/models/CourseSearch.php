@@ -18,8 +18,8 @@ class CourseSearch extends Course
     public function rules()
     {
         return [
-            [['id', 'tid', 'capacity', 'cost'], 'integer'],
-            [['cname', 'startdate', 'enddate', 'starttime', 'endtime'], 'safe'],
+            [['id', 'capacity', 'cost'], 'integer'],
+            [['cname', 'tid', 'startdate', 'enddate', 'starttime', 'endtime'], 'safe'],
         ];
     }
 
@@ -57,10 +57,11 @@ class CourseSearch extends Course
             return $dataProvider;
         }
 
+        $query->joinWith('t');
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'tid' => $this->tid,
+            // 'tid' => $this->tid,
             'capacity' => $this->capacity,
             'cost' => $this->cost,
         ]);
@@ -69,7 +70,8 @@ class CourseSearch extends Course
             ->andFilterWhere(['like', 'startdate', $this->startdate])
             ->andFilterWhere(['like', 'enddate', $this->enddate])
             ->andFilterWhere(['like', 'starttime', $this->starttime])
-            ->andFilterWhere(['like', 'endtime', $this->endtime]);
+            ->andFilterWhere(['like', 'endtime', $this->endtime])
+            ->andFilterWhere(['like', 'tbl_teacher.lname', $this->tid]);
 
         return $dataProvider;
     }

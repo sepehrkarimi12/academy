@@ -5,7 +5,7 @@ namespace frontend\models;
 use Yii;
 
 /**
- * This is the model class for table "tbl_course".
+ * This is the model class for table "{{%tbl_course}}".
  *
  * @property int $id
  * @property string $cname
@@ -17,6 +17,7 @@ use Yii;
  * @property int $capacity
  * @property int $cost
  *
+ * @property TblTeacher $t
  * @property TblPayment[] $tblPayments
  * @property TblRegister[] $tblRegisters
  */
@@ -27,7 +28,7 @@ class Course extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'tbl_course';
+        return '{{%tbl_course}}';
     }
 
     /**
@@ -41,6 +42,7 @@ class Course extends \yii\db\ActiveRecord
             [['cname'], 'string', 'max' => 100],
             [['startdate', 'enddate'], 'string', 'max' => 50],
             [['starttime', 'endtime'], 'string', 'max' => 5],
+            [['tid'], 'exist', 'skipOnError' => true, 'targetClass' => Teacher::className(), 'targetAttribute' => ['tid' => 'id']],
         ];
     }
 
@@ -65,6 +67,14 @@ class Course extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getT()
+    {
+        return $this->hasOne(Teacher::className(), ['id' => 'tid']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getTblPayments()
     {
         return $this->hasMany(TblPayment::className(), ['cid' => 'id']);
@@ -78,8 +88,8 @@ class Course extends \yii\db\ActiveRecord
         return $this->hasMany(TblRegister::className(), ['cid' => 'id']);
     }
 
-    public function getAllTeachers()
-    {
-        return Teacher::find()->All();
-    }
+    public function getAllTeachers() 
+   { 
+       return Teacher::find()->All(); 
+   }
 }

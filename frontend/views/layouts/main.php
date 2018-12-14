@@ -37,13 +37,11 @@ AppAsset::register($this);
     ]);
     $menuItems = [
         ['label' => 'خانه', 'url' => ['/site/index']],
-        ['label' => 'About', 'url' => ['/site/about']],
-        ['label' => 'Contact', 'url' => ['/site/contact']],
-        ['label' => 'معلمین', 'url' => ['/teacher']],
-        ['label' => 'دانشجویان', 'url' => ['/student']],
-        ['label' => 'درس ها', 'url' => ['/course']],
-        ['label' => 'ثبت نام', 'url' => ['/register']],
-        ['label' => 'پرداخت', 'url' => ['/payment']],
+        ['label' => 'معلمین', 'url' => ['/teacher'],'visible'=>!Yii::$app->user->isGuest],
+        ['label' => 'دانشجویان', 'url' => ['/student'],'visible'=>!Yii::$app->user->isGuest],
+        ['label' => 'درس ها', 'url' => ['/course'],'visible'=>!Yii::$app->user->isGuest],
+        ['label' => 'ثبت نام', 'url' => ['/register'],'visible'=>!Yii::$app->user->isGuest],
+        ['label' => 'پرداخت', 'url' => ['/payment'],'visible'=>!Yii::$app->user->isGuest],
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];

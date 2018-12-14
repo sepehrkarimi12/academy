@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\select2\Select2;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Student */
@@ -21,17 +22,36 @@ use yii\widgets\ActiveForm;
         for($i=1300; $i<=1397; $i++)
             $arr+=[$i=>$i];
     ?>
-    <?= $form->field($model,'birthday')->dropDownList($arr,['prompt'=>'سال تولد'])?>
+    <?php
+        echo $form->field($model, 'birthday')->widget(Select2::classname(), [
+            'data' => $arr,
+            'options' => ['placeholder' => 'سال تولد'],
+            'pluginOptions' => [
+                'allowClear' => true
+            ],
+        ]);
+    ?>
 
     <?= $form->field($model, 'birthplace')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'certificate')->dropDownList([ 'کمتر از سیکل' => 'کمتر از سیکل', 'سیکل' => 'سیکل', 'دیپلم' => 'دیپلم', 'فوق دیپلم' => 'فوق دیپلم', 'لیسانس' => 'لیسانس', 'فوق لیسانس' => 'فوق لیسانس', 'دکتری' => 'دکتری', 'فوق دکتری' => 'فوق دکتری', 'بیشتر از دکتری' => 'بیشتر از دکتری', ], ['prompt' => 'مدرک تحصیلی']) ?>
+    <?php
+        $arr2=[ 'کمتر از سیکل' => 'کمتر از سیکل', 'سیکل' => 'سیکل', 'دیپلم' => 'دیپلم', 'فوق دیپلم' => 'فوق دیپلم', 'لیسانس' => 'لیسانس', 'فوق لیسانس' => 'فوق لیسانس', 'دکتری' => 'دکتری', 'فوق دکتری' => 'فوق دکتری', 'بیشتر از دکتری' => 'بیشتر از دکتری', ];
+    ?>
+    <?php
+        echo $form->field($model, 'certificate')->widget(Select2::classname(), [
+            'data' => $arr2,
+            'options' => ['placeholder' => 'مدرک تحصیلی '],
+            'pluginOptions' => [
+                'allowClear' => true
+            ],
+        ]);
+    ?>
 
     <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'cellphone')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'address')->textArea(['maxlength' => true]) ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>

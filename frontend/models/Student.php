@@ -40,7 +40,8 @@ class Student extends \yii\db\ActiveRecord
             [['birthday'], 'integer'],
             [['certificate'], 'string'],
             [['fname', 'lname', 'birthplace'], 'string', 'max' => 100],
-            [['phone', 'cellphone'], 'string', 'max' => 11],
+            [['phone', 'cellphone'], 'string','min'=>8, 'max' => 11],
+            [['phone', 'cellphone'],'integer'],
             [['address'], 'string', 'max' => 300],
         ];
     }

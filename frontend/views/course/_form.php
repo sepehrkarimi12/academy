@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
+use kartik\select2\Select2;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Course */
@@ -15,15 +16,20 @@ use yii\helpers\ArrayHelper;
 
     <?= $form->field($model, 'cname')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model,'tid')->dropDownList(
-        ArrayHelper::map($model->getAllTeachers(),
-            'id',
-            function($model) {
-                return $model->fname.' '.$model['lname'];
-            }
-    ),
-        ['prompt'=>'نام استاد را انتخاب کنید ...']
-    )?>
+    <?php
+        echo $form->field($model, 'tid')->widget(Select2::classname(), [
+            'data' => ArrayHelper::map($model->getAllTeachers(),
+                    'id',
+                    function($model) {
+                        return $model->fname.' '.$model['lname'];
+                    }
+            ),
+            'options' => ['placeholder' => 'نام استاد'],
+            'pluginOptions' => [
+                'allowClear' => true
+            ],
+        ]);
+    ?>
 
     <?= $form->field($model, 'startdate')->widget(jDate\DatePicker::className())->textInput(['class'=>'col-lg-12 form-control']) ?>
 

@@ -18,8 +18,8 @@ class RegisterSearch extends Register
     public function rules()
     {
         return [
-            [['id', 'sid', 'cid'], 'integer'],
-            [['rdate'], 'safe'],
+            [['id'], 'integer'],
+            [['rdate', 'sid', 'cid'], 'safe'],
         ];
     }
 
@@ -57,14 +57,22 @@ class RegisterSearch extends Register
             return $dataProvider;
         }
 
+        $query->joinWith('s');
+        $query->joinWith('c');
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'sid' => $this->sid,
-            'cid' => $this->cid,
+            // 'sid' => $this->sid,
+            // 'cid' => $this->cid,
         ]);
 
-        $query->andFilterWhere(['like', 'rdate', $this->rdate]);
+        $query->andFilterWhere(['like', 'rdate', $this->rdate])
+        ->andFilterWhere([
+            'OR',
+            ['like', 'tbl_student.fname', $this->sid],
+            ['like', 'tbl_student.lname', $this->sid]        
+        ])
+        ->andFilterWhere(['like', 'tbl_course.cname', $this->cid]);
 
         return $dataProvider;
     }

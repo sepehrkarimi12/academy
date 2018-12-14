@@ -8,6 +8,7 @@ use frontend\models\CourseSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Json;
 
 /**
  * CourseController implements the CRUD actions for Course model.
@@ -123,5 +124,12 @@ class CourseController extends Controller
         }
 
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+    }
+
+    // this is for register form
+    public function actionGetCource($id)
+    {
+        $model = $this->findModel($id);
+        echo Json::encode($model);
     }
 }

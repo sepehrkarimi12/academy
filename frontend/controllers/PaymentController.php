@@ -8,6 +8,7 @@ use frontend\models\PaymentSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Json;
 
 /**
  * PaymentController implements the CRUD actions for Payment model.
@@ -125,5 +126,18 @@ class PaymentController extends Controller
         }
 
         throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+    }
+
+    // get registered courses of a particular student
+    public function actionGetRegisteredCourses($id)
+    {
+        // $model = $this->findModel($id);
+        $all=\frontend\models\Register::findAll(['sid'=>$id]);
+        $courses=[];
+        foreach ($all as $v) {
+            $courses[]=\frontend\models\Course::findAll(['id'=>$v->cid]);
+        }
+        echo Json::encode($courses);
+
     }
 }

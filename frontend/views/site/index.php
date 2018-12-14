@@ -1,6 +1,6 @@
 <?php
 
-if (Yii::$app->user->isguest) :
+if (true) :
 /* @var $this yii\web\View */
 
 $this->title = 'My Yii Application';

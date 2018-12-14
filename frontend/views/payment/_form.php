@@ -19,14 +19,21 @@ use yii\helpers\ArrayHelper;
             function($model) {
                 return $model->fname.' '.$model['lname'];
             }
-    ),
-        ['prompt'=>'نام استاد را انتخاب کنید ...']
+        ),
+        ['prompt'=>'نام دانشجو را انتخاب کنید ...','id'=>'studentId']
     )?>
 
-    <?= $form->field($model,'cid')->dropDownList(
-        ArrayHelper::map($model->getAllCourses(),'id','cname'),
-        ['prompt'=>'نام استاد را انتخاب کنید ...']
+    <?= $form->field($model,'cid')->dropDownList([],
+        ['prompt'=>'نام درس را انتخاب کنید ...','id'=>'courses']
     )?>
+
+    <div class="list-group">
+      <a href="#" id="" class="list-group-item disabled">
+          <h4>هزینه درس ها</h4>
+      </a>
+      <div id="costs">
+      </div>
+    </div>
 
     <?= $form->field($model, 'cost')->textInput() ?>
 
@@ -37,3 +44,41 @@ use yii\helpers\ArrayHelper;
     <?php ActiveForm::end(); ?>
 
 </div>
+
+
+<?php 
+$script = <<< JS
+//here you right all your javascript stuff
+$('#studentId').change(function(){
+    var studentId = $(this).val();
+    $.get('../payment/get-registered-courses', { id : studentId }, function(data){
+        var data = $.parseJSON(data);
+
+        //remove options of course select
+        $('#courses')
+            .find('option')
+            .remove()
+            .end()
+            .append('<option value="">نام درس را انتخاب کنید ...</option>')
+            .val('whatever')
+        ;
+
+        //remove costs of courses
+        $( "#costs" ).empty();
+
+        $.each(data, function( k, v ) {
+          $.each(v, function( k, v ) {
+              //alert( "Key: " + k + ", Value: " + v['cname'] );
+
+              $('#courses').append("<option value=" + v['id'] + ">" + v['cname'] + "</option>");
+
+              $('#costs').append("<a class=" + "list-group-item" + ">" + v['cname'] + " : " + v['cost'] + "</a>");
+
+            });
+        });
+
+    });
+});
+JS;
+$this->registerJS($script);
+?>

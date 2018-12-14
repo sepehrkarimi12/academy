@@ -57,7 +57,7 @@ class Register extends \yii\db\ActiveRecord
      */
     public function getC()
     {
-        return $this->hasOne(TblCourse::className(), ['id' => 'cid']);
+        return $this->hasOne(Course::className(), ['id' => 'cid']);
     }
 
     /**
@@ -65,7 +65,7 @@ class Register extends \yii\db\ActiveRecord
      */
     public function getS()
     {
-        return $this->hasOne(TblStudent::className(), ['id' => 'sid']);
+        return $this->hasOne(Student::className(), ['id' => 'sid']);
     }
 
     public function getAllStudents()

@@ -5,7 +5,7 @@ namespace frontend\models;
 use Yii;
 
 /**
- * This is the model class for table "tbl_teacher".
+ * This is the model class for table "{{%tbl_teacher}}".
  *
  * @property int $id
  * @property string $fname
@@ -15,6 +15,8 @@ use Yii;
  * @property string $phone
  * @property string $cellphone
  * @property string $address
+ *
+ * @property TblCourse[] $tblCourses
  */
 class Teacher extends \yii\db\ActiveRecord
 {
@@ -23,7 +25,7 @@ class Teacher extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'tbl_teacher';
+        return '{{%tbl_teacher}}';
     }
 
     /**
@@ -35,7 +37,8 @@ class Teacher extends \yii\db\ActiveRecord
             [['fname', 'lname', 'workfield', 'experience', 'phone', 'cellphone', 'address'], 'required'],
             [['fname', 'lname', 'workfield'], 'string', 'max' => 100],
             [['experience'], 'string', 'max' => 2],
-            [['phone', 'cellphone'], 'string', 'max' => 11],
+            [['phone', 'cellphone'], 'string','min'=>8, 'max' => 11],
+            [['phone', 'cellphone'], 'integer'],
             [['address'], 'string', 'max' => 300],
         ];
     }
@@ -55,5 +58,13 @@ class Teacher extends \yii\db\ActiveRecord
             'cellphone' => Yii::t('app', 'Cellphone'),
             'address' => Yii::t('app', 'Address'),
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTblCourses()
+    {
+        return $this->hasMany(TblCourse::className(), ['tid' => 'id']);
     }
 }
