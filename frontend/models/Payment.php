@@ -43,7 +43,7 @@ class Payment extends \yii\db\ActiveRecord
 
     public function checkCost($attribute, $params)
     {
-        $pay=$this->find()->where(['sid'=>$this->sid])->sum('cost') + $this->cost;
+        $pay = $this->find()->where(['sid'=>$this->sid])->sum('cost') + $this->cost;
         $courseCost=$this->c->cost;
         $bedehi = $courseCost - $pay < 0 ? 0 : $courseCost - $pay;
 

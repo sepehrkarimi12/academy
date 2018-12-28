@@ -29,7 +29,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => Yii::$app->name,
+        'brandLabel' => 'آموزشگاه کامپیوتر',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
@@ -37,20 +37,20 @@ AppAsset::register($this);
     ]);
     $menuItems = [
         ['label' => 'خانه', 'url' => ['/site/index']],
-        ['label' => 'معلمین', 'url' => ['/teacher'],'visible'=>!Yii::$app->user->isGuest],
+        ['label' => 'استاد ها', 'url' => ['/teacher'],'visible'=>!Yii::$app->user->isGuest],
         ['label' => 'دانشجویان', 'url' => ['/student'],'visible'=>!Yii::$app->user->isGuest],
         ['label' => 'درس ها', 'url' => ['/course'],'visible'=>!Yii::$app->user->isGuest],
         ['label' => 'ثبت نام', 'url' => ['/register'],'visible'=>!Yii::$app->user->isGuest],
-        ['label' => 'پرداخت', 'url' => ['/payment'],'visible'=>!Yii::$app->user->isGuest],
+        ['label' => 'پرداخت ها', 'url' => ['/payment'],'visible'=>!Yii::$app->user->isGuest],
     ];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+        $menuItems[] = ['label' => 'ثبت اکانت', 'url' => ['/site/signup']];
+        $menuItems[] = ['label' => 'ورود', 'url' => ['/site/login']];
     } else {
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
+                'خروج (' . Yii::$app->user->identity->username . ')',
                 ['class' => 'btn btn-link logout']
             )
             . Html::endForm()
@@ -74,9 +74,9 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
+        <p class="pull-left"><?= Html::encode('آموزشگاه کامپیوتر') ?> <?= Yii::$app->jdate->date('Y-m-d') ?> &copy; </p>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
+        <p class="pull-right">سپهر کریمی صدیق و علی خاندوزی</p>
     </div>
 </footer>
 

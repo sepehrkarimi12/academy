@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 28, 2018 at 09:22 AM
+-- Generation Time: Dec 28, 2018 at 02:15 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -186,7 +186,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'kprNwq5v6qdNwonXMhCt6EGAapyTNtyr', '$2y$13$Gu4rJJta4zEqLVXSeWJPYuB3KkR5VvYqX2Y0ydvqqsRT1HPcdbgGW', NULL, 'admin@gmail.com', 10, 1543139767, 1543139767);
+(1, 'admin', 'kprNwq5v6qdNwonXMhCt6EGAapyTNtyr', '$2y$13$Gu4rJJta4zEqLVXSeWJPYuB3KkR5VvYqX2Y0ydvqqsRT1HPcdbgGW', NULL, 'admin@gmail.com', 10, 1543139767, 1543139767),
+(2, 'sepehr', 'hzEk7TKYiZA3sr8tgEmG1VzekBBjcfuR', '$2y$13$BB.FN.f8U7YaFovCbB/ck.LQKSvNyzgfXDfH8C4ac1lYFENyEIQ6W', NULL, 'sepehr.k12@gmail.com', 10, 1546002727, 1546002727);
 
 --
 -- Indexes for dumped tables
@@ -280,7 +281,7 @@ ALTER TABLE `tbl_teacher`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables

@@ -24,7 +24,7 @@ use kartik\select2\Select2;
                         return $model->fname.' '.$model['lname'];
                     }
             ),
-            'options' => ['placeholder' => 'نام استاد'],
+            'options' => ['placeholder' => 'نام استاد','dir'=>'rtl'],
             'pluginOptions' => [
                 'allowClear' => true
             ],

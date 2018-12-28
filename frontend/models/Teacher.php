@@ -58,6 +58,18 @@ class Teacher extends \yii\db\ActiveRecord
             'cellphone' => Yii::t('app', 'Cellphone'),
             'address' => Yii::t('app', 'Address'),
         ];
+
+        //  return [
+        //     'id' => Yii::t('app', 'ID'),
+        //     'fname' => Yii::t('app', 'نام'),
+        //     'lname' => Yii::t('app', 'نام خانوادگی'),
+        //     'workfield' => Yii::t('app', 'حرفه'),
+        //     'experience' => Yii::t('app', 'تجربه'),
+        //     'phone' => Yii::t('app', 'تلفن'),
+        //     'cellphone' => Yii::t('app', 'تلفن همراه'),
+        //     'address' => Yii::t('app', 'آدرس'),
+        // ];
+        
     }
 
     /**

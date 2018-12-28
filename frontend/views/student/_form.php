@@ -25,7 +25,7 @@ use kartik\select2\Select2;
     <?php
         echo $form->field($model, 'birthday')->widget(Select2::classname(), [
             'data' => $arr,
-            'options' => ['placeholder' => 'سال تولد'],
+            'options' => ['placeholder' => 'سال تولد','dir'=>'rtl'],
             'pluginOptions' => [
                 'allowClear' => true
             ],
@@ -40,7 +40,7 @@ use kartik\select2\Select2;
     <?php
         echo $form->field($model, 'certificate')->widget(Select2::classname(), [
             'data' => $arr2,
-            'options' => ['placeholder' => 'مدرک تحصیلی '],
+            'options' => ['placeholder' => 'مدرک تحصیلی ','dir'=>'rtl'],
             'pluginOptions' => [
                 'allowClear' => true
             ],

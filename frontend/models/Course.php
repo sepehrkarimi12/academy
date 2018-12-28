@@ -77,7 +77,7 @@ class Course extends \yii\db\ActiveRecord
      */
     public function getTblPayments()
     {
-        return $this->hasMany(TblPayment::className(), ['cid' => 'id']);
+        return $this->hasMany(Payment::className(), ['cid' => 'id']);
     }
 
     /**
@@ -85,7 +85,7 @@ class Course extends \yii\db\ActiveRecord
      */
     public function getTblRegisters()
     {
-        return $this->hasMany(TblRegister::className(), ['cid' => 'id']);
+        return $this->hasMany(Register::className(), ['cid' => 'id']);
     }
 
     public function getAllTeachers() 

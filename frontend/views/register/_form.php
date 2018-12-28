@@ -22,7 +22,7 @@ use kartik\select2\Select2;
                         return $model->fname.' '.$model['lname'];
                     }
             ),
-            'options' => ['placeholder' => 'نام دانشجو'],
+            'options' => ['placeholder' => 'نام دانشجو','dir'=>'rtl'],
             'pluginOptions' => [
                 'allowClear' => true
             ],
@@ -34,7 +34,8 @@ use kartik\select2\Select2;
             'data' => ArrayHelper::map($model->getAllCourses(),'id','cname'),
             'options' => [
                 'placeholder' => 'نام درس',
-                'id'=>'courseId'
+                'id'=>'courseId',
+                'dir'=>'rtl'
             ],
             'pluginOptions' => [
                 'allowClear' => true
