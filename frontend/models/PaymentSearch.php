@@ -18,8 +18,8 @@ class PaymentSearch extends Payment
     public function rules()
     {
         return [
-            [['id', 'sid', 'cid', 'cost'], 'integer'],
-            [['pdate'], 'safe'],
+            [['id', 'cost'], 'integer'],
+            [['pdate', 'sid', 'cid',], 'safe'],
         ];
     }
 
@@ -57,15 +57,24 @@ class PaymentSearch extends Payment
             return $dataProvider;
         }
 
+        $query->joinWith('s');
+        $query->joinWith('c');
+
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'sid' => $this->sid,
-            'cid' => $this->cid,
+            // 'sid' => $this->sid,
+            // 'cid' => $this->cid,
             'cost' => $this->cost,
         ]);
 
-        $query->andFilterWhere(['like', 'pdate', $this->pdate]);
+        $query->andFilterWhere(['like', 'pdate', $this->pdate])
+        ->andFilterWhere([
+            'OR',
+            ['like', 'tbl_student.fname', $this->sid],
+            ['like', 'tbl_student.lname', $this->sid]        
+        ])
+        ->andFilterWhere(['like', 'tbl_course.cname', $this->cid]);;
 
         return $dataProvider;
     }

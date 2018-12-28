@@ -28,9 +28,19 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
-            'sid',
-            'cid',
+            // 'id',
+            [
+                'attribute'=>'sid',
+                'value'=>function($data){
+                    return $data->s->fname. ' '.$data->s->lname;
+                }
+            ],
+            [
+                'attribute'=>'cid',
+                'value'=>function($data){
+                    return $data->c->cname;
+                }
+            ],
             'cost',
             'pdate',
         ],
