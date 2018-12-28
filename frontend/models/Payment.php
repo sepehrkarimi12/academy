@@ -37,7 +37,25 @@ class Payment extends \yii\db\ActiveRecord
             [['pdate'], 'string', 'max' => 50],
             [['sid'], 'exist', 'skipOnError' => true, 'targetClass' => Student::className(), 'targetAttribute' => ['sid' => 'id']],
             [['cid'], 'exist', 'skipOnError' => true, 'targetClass' => Course::className(), 'targetAttribute' => ['cid' => 'id']],
+            ['cost','checkCost'],
         ];
+    }
+
+    public function checkCost($attribute, $params)
+    {
+        $pay=$this->find()->where(['sid'=>$this->sid])->sum('cost') + $this->cost;
+        $courseCost=$this->c->cost;
+        $bedehi = $courseCost - $pay < 0 ? 0 : $courseCost - $pay;
+
+        if($pay > $courseCost)
+        {
+            $this->addError('cost', "بدهی شما برای این درس "." ".$this->c->cname." " ."$bedehi (ریال) است");
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 
     /**
@@ -59,7 +77,7 @@ class Payment extends \yii\db\ActiveRecord
      */
     public function getS()
     {
-        return $this->hasOne(TblStudent::className(), ['id' => 'sid']);
+        return $this->hasOne(Student::className(), ['id' => 'sid']);
     }
 
     /**
@@ -67,7 +85,7 @@ class Payment extends \yii\db\ActiveRecord
      */
     public function getC()
     {
-        return $this->hasOne(TblCourse::className(), ['id' => 'cid']);
+        return $this->hasOne(Course::className(), ['id' => 'cid']);
     }
 
     public function getAllStudents()

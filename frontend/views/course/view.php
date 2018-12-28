@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute'=>'tid',
                 'value'=>function($data){
-                    return $data->t->fname. ' '. $data->t->lname;
+                    return $data->tid ? $data->t->fname. ' '. $data->t->lname : '';
                 }
             ],
             'startdate',

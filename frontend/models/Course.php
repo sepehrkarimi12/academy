@@ -37,7 +37,7 @@ class Course extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['cname', 'tid', 'startdate', 'enddate', 'starttime', 'endtime', 'capacity', 'cost'], 'required'],
+            [['cname', 'startdate', 'enddate', 'starttime', 'endtime', 'capacity', 'cost'], 'required'],
             [['tid', 'capacity', 'cost'], 'integer'],
             [['cname'], 'string', 'max' => 100],
             [['startdate', 'enddate'], 'string', 'max' => 50],

@@ -2,5 +2,4 @@ SET COMMENT FOR FIELDS
 
 payment->check pay <= cost
 
-payment => return just coursec of particular student
 

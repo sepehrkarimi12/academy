@@ -67,7 +67,14 @@ class PaymentController extends Controller
     {
         $model = new Payment();
 
-        if ($model->load(Yii::$app->request->post()) ) {
+        if ( $model->load(Yii::$app->request->post()) && $model->validate() ) {
+
+            // echo "<pre>";
+            // print_r($_POST);
+            // die();
+
+            // $this->find()->where(...)->sum('column');
+
             $model->pdate = str_replace('-', '/', Yii::$app->jdate->date('Y-m-d H:m:s') );
             $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
